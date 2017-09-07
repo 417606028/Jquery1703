@@ -19,7 +19,8 @@
 </body>
 <script>
     $(function () {
-       $('div').on('click',function (e) {
+        /******方法1**********/
+       /*$('div').on('click',function (e) {
           if(e.target==e.currentTarget){
               $(this).queue(function () {
                   $(this).dequeue().css('background','red').children().on('click',function () {
@@ -29,7 +30,28 @@
               })
           }
 
-       })
+       })*/
+       /*****方法2**********/
+        $('div').queue(function () {
+            setTimeout(function () {
+                $('div').click(function () {
+                    $(this).css('background','red');
+                    $(this).dequeue();
+                })
+            },2000)
+
+        })
+        $('div').queue(function () {
+            setTimeout(function () {
+                $('span').click(function () {
+                    $(this).css('font-size','100px');
+                    $(this).dequeue();
+                })
+            },2000)
+
+        })
+
+
     });
 </script>
 </html>
