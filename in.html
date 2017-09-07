@@ -15,12 +15,13 @@
     }
 </style>
 <body>
+<a href="index.html"></a>
 <div><span>abc</span></div>
 </body>
 <script>
     $(function () {
         /******方法1**********/
-       /*$('div').on('click',function (e) {
+        /*$('div').on('click',function (e) {
           if(e.target==e.currentTarget){
               $(this).queue(function () {
                   $(this).dequeue().css('background','red').children().on('click',function () {
@@ -31,27 +32,60 @@
           }
 
        })*/
-       /*****方法2**********/
+        /*****方法2**********/
         $('div').queue(function () {
             setTimeout(function () {
                 $('div').click(function () {
-                    $(this).css('background','red');
+                    $(this).css('background', 'red');
                     $(this).dequeue();
                 })
-            },2000)
+            }, 2000)
 
         })
         $('div').queue(function () {
             setTimeout(function () {
                 $('span').click(function () {
-                    $(this).css('font-size','100px');
+                    $(this).css('font-size', '100px');
                     $(this).dequeue();
                 })
-            },2000)
+            }, 2000)
 
         })
+        /*******AJAX*******/
 
+        /* var ajax=new XMLHttpRequest();
+    ajax.onload=function () {
+        var obj=JSON.parse(ajax.response);
+       console.log(ajax.response)
+    }
+    ajax.open('get','index.html');
+    ajax.send();
+    });*/
+        function showJson() {
+            var ajax;
+            if (window.XMLHttpRequest) {
+                ajax = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                ajax = new window.ActiveXObject();
+            } else {
+                alert("请升级至最新版本的浏览器");
+            }
+            if (ajax != null) {
+                ajax.open("GET", "./json.json", true);
+                ajax.send();
+                ajax.onreadystatechange = function () {
+                    if (ajax.readyState == 4 && ajax.status == 200) {
+                        var obj = JSON.parse(ajax.response);
+                        console.log(obj)
+                        for (var name in obj) {
+                            alert(obj[name]);
+                        }
+                    }
+                };
 
-    });
+            }
+        }
+        showJson();
+    })
 </script>
 </html>
