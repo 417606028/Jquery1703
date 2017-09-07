@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery.min.js"></script>
+</head>
+<style>
+    div{
+        width: 300px;
+        height: 300px;
+    }
+</style>
+<body>
+<div><span>abc</span></div>
+</body>
+<script>
+    $(function () {
+       $('div').on('click',function (e) {
+          if(e.target==e.currentTarget){
+              $(this).queue(function () {
+                  $(this).dequeue().css('background','red').children().on('click',function () {
+                      $(this).css('font-size','100px')
+                  })
+
+              })
+          }
+
+       })
+    });
+</script>
+</html>
